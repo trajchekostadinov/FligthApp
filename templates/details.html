@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <script src="{% static 'bootstrap.js' %}"></script>
+</head>
+<body>
+        <div class="container ">
+            <div class="row">
+                <div class="card w-50 mx-auto bg-light">
+                     <h5 class="card-title text-center bg-primary w-25 mx-auto">{{flight.code}}</h5>
+                    <p class="card-text mx-auto">Flight from: {{flight.take_off_airport}}</p>
+                    <p class="card-text mx-auto">Flight to: {{flight.landing_airport}}</p>
+                    <img src="{% static 'hot_air_ballon.jpg' %}" class="w-25 card-text mx-auto">
+                    <a href="{% url 'index' %}" class="btn btn-primary w-25">Back</a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

@@ -1,18 +1,16 @@
-from random import choices
-
 from django.db import models
 from django.contrib.auth.models import User
 
 
 class Pilot(models.Model):
     RANK_CHOICES = [
-        ('J', 'Junior'),
+        ('J', 'Junior'), # првото е како ке пишува во база, а второто на страната (frontend UI)
         ('I','Intermediate'),
         ('S','Senior')
     ]
 
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
+    name = models.CharField(max_length=80)
+    surname = models.CharField(max_length=80)
     year_of_birth=models.IntegerField()
     total_flight_hours = models.IntegerField(null=True,blank=True)
     rank = models.CharField(max_length=1,choices=RANK_CHOICES)
@@ -27,9 +25,9 @@ class Baloon(models.Model):
         ('M', 'Medium Baloon'),
         ('L', 'Large Baloon'),
     ]
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=80)
     type=models.CharField(max_length=1,choices=TYPE_CHOICES)
-    manufacturer=models.CharField(max_length=100)
+    manufacturer=models.CharField(max_length=80)
     max_passengers=models.IntegerField()
     image = models.ImageField(blank=True,null=True)
 
@@ -38,7 +36,7 @@ class Baloon(models.Model):
 
 
 class Airline(models.Model):
-    name=models.CharField(max_length=100)
+    name=models.CharField(max_length=80)
     year_founded = models.IntegerField()
     outside_Europe = models.BooleanField()
 

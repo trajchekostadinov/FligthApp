@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <script src="{% static 'bootstrap.js' %}"></script>
+</head>
+<body>
+    <h1 class="display-2 text-center bg-primary m-2 p-3">{{ page_title }}</h1>
+    <div>
+    <a href="{% url 'addForm' %}" class="btn btn-primary">Add new Flight</a>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for flight in flights %}
+                <div class="card col-4">
+                    <img src="{%  static 'hot_air_ballon.jpg' %}" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{flight.code}}</h5>
+                            <p class="card-text text-center">{{flight.take_off_airport}} - {{flight.landing_airport}}</p>
+                            <a href="{% url 'details' flight.id %}" class="btn btn-primary">Details</a>
+                        </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

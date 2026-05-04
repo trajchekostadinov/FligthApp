@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from flightapp import views as app_views
+from flightapp_project import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('index/',app_views.index, name='index'), #ja importirame funkcijata index od app_views za da redirektirame na /index
+    path('details/<id>',app_views.details,name='details'), # <id> za da znae za koj let se odnesuva
+    path('add_form',app_views.addForm,name='addForm'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

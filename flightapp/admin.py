@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Pilot, Airline, AirlinePilot, Baloon, Flight
+from .models import *            #site modeli so *
 
 class AirlinePilotInline(admin.TabularInline):
     model = AirlinePilot
@@ -45,11 +45,13 @@ class FlightAdmin(admin.ModelAdmin):
         return Flight.objects.filter(user=request.user)
 
     def save_model(self, request, obj, form, change):
-        obj.user = request.user
-        return super(FlightAdmin, self).save_model(request, obj, form, change)
+        if getattr(obj,'user',None) is None:
+            obj.user = request.user
+        obj.save()
 
-    def has_change_permission(self, request, obj = None):
-        if obj and obj.user == request.user:
+
+    def has_change_permission(self, request, obj = None):    #може obj да биде none/null затоа мора да провериме дали постои прво инаку фрла грешка
+        if obj and obj.user == request.user:      #ако тој што пробува да смени нешто(obj.user) е тој што е тековно најавен(request.user) = дозволи му инаку не
             return True
         return False
 
